@@ -21,7 +21,7 @@ getServiceWithID(objectID: String) > PFObject
 
 Parse.Cloud.define("getServiceList", function(req, res){
 	console.log("getServiceList > CALLED")
-	var retrieveAll = Parse.Query(Service)
+	var retrieveAll = new Parse.Query(Service)
 	var objects = new Array()
 	retrieveAll.find({
 	  success: function(results) {
