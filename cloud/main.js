@@ -22,10 +22,24 @@ getServiceWithID(objectID: String) > PFObject
 Parse.Cloud.define("getServiceList", function(req, res){
 	console.log("getServiceList > CALLED")
 	var retrieveAll = new Parse.Query(Service)
-	var objects = new Array()
 	retrieveAll.find({
 	  success: function(results) {
 	  	console.log("getServiceList > FOUND " + results.length + " OBJECTS")
+	    res.success(results)
+	  },
+	  error: function(error) {
+	    res.error(error);
+	  }
+	});
+})
+
+Parse.Cloud.define("getServiceWithID", function(req, res){
+	console.log("getServiceWithID > CALLED")
+	var objectID = req.params.objectID
+	var retrieveWithID = new Parse.Query(Service)
+	retrieveWithID.get(objectID, {
+	  success: function(results) {
+	  	console.log("getServiceWithID > " + objectID + " FOUND")
 	    res.success(results)
 	  },
 	  error: function(error) {
