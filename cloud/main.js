@@ -25,13 +25,7 @@ Parse.Cloud.define("getServiceList", function(req, res){
 	var objects = new Array()
 	retrieveAll.find({
 	  success: function(results) {
-	  	console.log("getServiceList > FOUND " + results.length + "OBJECTS")
-	    for (var i = 0; i < results.length; i++) {
-	      objects[i]["id"] = results[i].id;
-	      objects[i]["title"] = results[i].get("title");
-	      objects[i]["shortDescription"] = results[i].get("shortDescription");
-	    }
-	    console.log("getServiceList > FETCHED " + objects.length + "OBJECTS")
+	  	console.log("getServiceList > FOUND " + results.length + " OBJECTS")
 	    res.success(objects)
 	  },
 	  error: function(error) {
