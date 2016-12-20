@@ -26,7 +26,7 @@ Parse.Cloud.define("getServiceList", function(req, res){
 	retrieveAll.find({
 	  success: function(results) {
 	  	console.log("getServiceList > FOUND " + results.length + " OBJECTS")
-	    res.success(objects)
+	    res.success(results)
 	  },
 	  error: function(error) {
 	    res.error(error);
