@@ -51,11 +51,34 @@ Parse.Cloud.define("getServiceWithID", function(req, res){
 	});
 })
 
+// For todays date;
+Date.prototype.today = function () { 
+    return ((this.getDate() < 10)?"0":"") + this.getDate() +"/"+(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+ this.getFullYear();
+}
+
+// For the time now
+Date.prototype.timeNow = function () {
+    return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
+}
+
+function getDate(){
+	return new Date().today() + " @ " + new Date().timeNow();
+}
+
+function messageJSON(text, sender){
+	var jsonObj =  new Object
+	jsonObj.body = text
+	jsonObj.sender = sender
+	jsonObj.date = getDate()
+	return JSON.stringify(jsonObj)
+}
+
 Parse.Cloud.define("saveNewRequest", function(req, res){
 	var user = req.params.user
-	var message = req.params.message
+	var messageBody = req.params.message
 	var subject = req.params.subject
 	var request = new Request()
+	var message = messageJSON(messageBody, "user")
 	request.set("from", user)
 	request.set("subject", subject)
 	request.set("conversation", [subject])
