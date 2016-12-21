@@ -7,6 +7,7 @@ var User = Parse.Object.extend("User")
 var Service = Parse.Object.extend("Service");
 var SubService = Parse.Object.extend("SubService");
 var ExtraService = Parse.Object.extend("ExtraService");
+var Request = Parse.Object.extend("Request");
 
 Parse.Cloud.define('hello', function(req, res) {
   res.success('Hi');
@@ -48,5 +49,17 @@ Parse.Cloud.define("getServiceWithID", function(req, res){
 	    res.error(error);
 	  }
 	});
+})
+
+Parse.Cloud.define("saveNewRequest", function(req, res){
+	var user = req.params.user
+	var message = req.params.message
+	var subject = req.params.subject
+	var request = new Request()
+	request.set("from", user)
+	request.set("subject", subject)
+	request.set("conversation", [subject])
+	request.set("status", "notRead")
+	request.set("newMessageReceived", true)
 })
 
