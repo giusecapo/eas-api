@@ -92,6 +92,7 @@ Parse.Cloud.define("saveNewRequest", function(req, res){
 })
 
 Parse.Cloud.define("sendMessageToRequestID", function(req, res){
+	console.log("sendMessageToRequestID > " + objectID + " CALLED")
 	var requestID = req.params.requestID
 	var messageBody = req.params.messageBody
 	var sender = req.params.sender
