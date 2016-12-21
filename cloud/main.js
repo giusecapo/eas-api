@@ -93,8 +93,8 @@ Parse.Cloud.define("saveNewRequest", function(req, res){
 
 Parse.Cloud.define("sendMessageToRequestID", function(req, res){
 	var query = new Parse.Query('Request'); 
-        $.subscription = query.subscribe();
-        $.subscription.on('create', (object) => {
+        let subscription = query.subscribe();
+        subscription.on('create', (object) => {
           console.log(object.get('conversation')); // This should output Mengyan
     	});
 	console.log("sendMessageToRequestID > CALLED")
