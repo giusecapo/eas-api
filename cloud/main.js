@@ -66,7 +66,7 @@ function getDate(){
 }
 
 function messageJSON(text, sender){
-	var jsonObj =  {body:text, sender:sender, date:getDate}
+	var jsonObj =  {date:getDate, sender:sender, body:text}
 	return jsonObj
 }
 
