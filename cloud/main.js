@@ -111,7 +111,7 @@ Parse.Cloud.define("sendMessageToRequestID", function(req, res){
 	  	  	console.log("New conversation > SAVED")
 		  	res.success(result)
 		  },
-		  error: function(error) {
+		  error: function(object, error) {
 		  	res.error(error)
 		  }	
 	  	})
