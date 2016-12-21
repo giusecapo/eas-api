@@ -66,11 +66,11 @@ function getDate(){
 }
 
 function messageJSON(text, sender){
-	var jsonObj =  new Object
-	jsonObj.body = text
-	jsonObj.sender = sender
-	jsonObj.date = getDate()
-	return JSON.stringify(jsonObj)
+	var jsonObj =  new Array()
+	jsonObj["body"] = text
+	jsonObj["sender"] = sender
+	jsonObj["date"] = getDate()
+	return jsonObj
 }
 
 Parse.Cloud.define("saveNewRequest", function(req, res){
