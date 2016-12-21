@@ -102,10 +102,12 @@ Parse.Cloud.define("sendMessageToRequestID", function(req, res){
 	  success: function(result) {
 	  	console.log("getRequestWithID > " + requestID + " FOUND")
 	  	console.log(JSON.stringify(result))
-	  	result.fetch
 	  	var oldConversation = result.get("conversation")
+	  	var newConversation = new Array()
+	  	newConversation = oldConversation
+	  	newConversation.push(message)
 	  	console.log("OLD CONVERSATION > " + JSON.stringify(oldConversation))
-	  	result.set("conversation", oldConversation.push(message))
+	  	result.set("conversation", newConversation)
 	  	result.save(null, {
 	  	  success: function(result) {
 	  	  	console.log("New conversation > SAVED")
