@@ -61,5 +61,13 @@ Parse.Cloud.define("saveNewRequest", function(req, res){
 	request.set("conversation", [subject])
 	request.set("status", "notRead")
 	request.set("newMessageReceived", true)
+	request.save(null, {
+	  success: function(result) {
+	  	res.success(result)
+	  },
+	  error: function(error) {
+	  	res.error(error)
+	  }
+	});
 })
 
