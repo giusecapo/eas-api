@@ -91,3 +91,30 @@ Parse.Cloud.define("saveNewRequest", function(req, res){
 	});
 })
 
+Parse.Cloud.define("sendMessageToRequestID", function(req, res){
+	var requestID = req.params.requestID
+	var messageBody = req.params.messageBody
+	var sender = req.params.sender
+	var message = messageJSON(messageBody, sender)
+	var retrieveWithID = new Parse.Query(Request)
+	retrieveWithID.get(requestID, {
+	  success: function(result) {
+	  	console.log("getRequestWithID > " + objectID + " FOUND")
+	  	var oldConversation = result.get("conversation")
+	  	var newConversation = oldConversation.append(message)
+	  	result.set("conversation", newConversation)
+	  	result.save(null, {
+	  	  success: function(result) {
+		  	res.success(result)
+		  },
+		  error: function(error) {
+		  	res.error(error)
+		  }	
+	  	})
+	  },
+	  error: function(error) {
+	    res.error(error);
+	  }
+	});
+})
+
