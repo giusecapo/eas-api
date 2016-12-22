@@ -148,8 +148,8 @@ Parse.Cloud.define("getRequestList", function(req, res){
 	  	// console.log(JSON.stringify(results))
 		for (request of results) {
 			console.log(JSON.stringify(request))
-			// let request = requests[i]
-	  // 		var title = request.get("subject")
+	  		var title = request.get("subject")
+	  		console.log(title)
 	  // 		var from = request.get("from")
 	  // 		var fromCountry = from.get("country")
 	  // 		var fromCompleteName = from.get("completeName")
