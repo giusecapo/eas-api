@@ -158,17 +158,17 @@ Parse.Cloud.define("getRequestList", function(req, res){
 	  		status = request.get("status")
 	  		notification = request.get("newMessageReceived")
 	  		console.log(title + status + notification + lastMessage)
-	  // 		var object = {
-			//     requestTitle: title,
-			//     fromUserCompleteName: fromCompleteName,
-			//     fromUserCountry: fromCountry,
-			//     lastMessagePreview: lastMessage,
-			//     status: status,
-			//     newMessageReceived: notification
-			// }
-			// output.push(object)
+	  		var object = {
+			    requestTitle: title,
+			    fromUserCompleteName: fromCompleteName,
+			    fromUserCountry: fromCountry,
+			    lastMessagePreview: lastMessage,
+			    status: status,
+			    newMessageReceived: notification
+			}
+			output.push(object)
 	  	}
-	    res.success("boh")
+	    res.success(object)
 	  },
 	  error: function(error) {
 	    res.error(error);
