@@ -148,15 +148,15 @@ Parse.Cloud.define("getRequestList", function(req, res){
 	  	// console.log(JSON.stringify(results))
 		for (request of results) {
 			console.log(JSON.stringify(request))
-	  		var title = request.get("subject")
-	  		console.log(title)
+	  		title = request.get("subject")
 	  // 		var from = request.get("from")
 	  // 		var fromCountry = from.get("country")
-	  // 		var fromCompleteName = from.get("completeName")
-	  // 		var conversationArray = request.get("conversation")
-	  // 		var lastMessage = conversationArray[conversationArray.length - 1]
-	  // 		var status = request.get("status")
-	  // 		var notification = request.get("newMessageReceived")
+	  		// var fromCompleteName = from.get("completeName")
+	  		 conversationArray = request.get("conversation")
+	  		// var lastMessage = conversationArray[conversationArray.length - 1]
+	  		status = request.get("status")
+	  		notification = request.get("newMessageReceived")
+	  		console.log(title + status + notification)
 	  // 		var object = {
 			//     requestTitle: title,
 			//     fromUserCompleteName: fromCompleteName,
