@@ -168,7 +168,7 @@ Parse.Cloud.define("getRequestList", function(req, res){
 			}
 			output.push(object)
 	  	}
-	    res.success(object)
+	    res.success(output)
 	  },
 	  error: function(error) {
 	    res.error(error);
