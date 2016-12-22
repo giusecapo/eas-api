@@ -145,9 +145,9 @@ Parse.Cloud.define("getRequestList", function(req, res){
 	query.find({
 	  success: function(results) {
 	  	console.log("getRequestList > FOUND " + results.length + " OBJECTS")
-	  	console.log(JSON.stringify(results))
+	  	// console.log(JSON.stringify(results))
 		for (request in results) {
-			console.log("for")
+			console.log(JSON.stringify(request))
 			// let request = requests[i]
 	  // 		var title = request.get("subject")
 	  // 		var from = request.get("from")
