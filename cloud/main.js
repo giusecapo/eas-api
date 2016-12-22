@@ -92,11 +92,6 @@ Parse.Cloud.define("saveNewRequest", function(req, res){
 })
 
 Parse.Cloud.define("sendMessageToRequestID", function(req, res){
-	var query = new Parse.Query('Request'); 
-        let subscription = query.subscribe();
-        subscription.on('create', (object) => {
-          console.log(object.get('conversation')); // This should output Mengyan
-    	});
 	console.log("sendMessageToRequestID > CALLED")
 	var requestID = req.params.requestID
 	var messageBody = req.params.messageBody
@@ -129,3 +124,50 @@ Parse.Cloud.define("sendMessageToRequestID", function(req, res){
 	});
 })
 
+// getRequestList output:
+/*
+{
+    requestTitle: String,
+    fromUserCompleteName: String,
+    fromUserCountry: String,
+    lastMessagePreview(250): String,
+    status: String
+    newMessageReceived: boolean
+}
+*/
+
+Parse.Cloud.define("getRequestList", function(req, res){
+	console.log("getRequestList > CALLED")
+	var query = new Parse.Query('Request'); 
+	var output = new Array()
+	query.notEqualTo("status", "archived");
+	query.includeKey("from")
+	query.find({
+	  success: function(results) {
+	  	console.log("getRequestList > FOUND " + results.length + " OBJECTS")
+	  	for(var request in results){
+	  		var title = request.get("subject")
+	  		var from = request.get("from")
+	  		var fromCountry = from.get("country")
+	  		var fromCompleteName = from.get("completeName")
+	  		var conversationArray = request.get("conversation")
+	  		var lastMessage = conversationArray[conversationArray.length - 1]
+	  		var status = request.get("status")
+	  		var notification = request.get("newMessageReceived")
+	  		var object = {
+			    requestTitle: title,
+			    fromUserCompleteName: fromCompleteName,
+			    fromUserCountry: fromCountry,
+			    lastMessagePreview: lastMessage,
+			    status: status,
+			    newMessageReceived: notification
+			}
+			output.push(object)
+	  	}
+	    res.success(output)
+	  },
+	  error: function(error) {
+	    res.error(error);
+	  }
+	});
+})
