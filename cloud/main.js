@@ -141,7 +141,7 @@ Parse.Cloud.define("getRequestList", function(req, res){
 	var query = new Parse.Query('Request'); 
 	var output = new Array()
 	query.notEqualTo("status", "archived");
-	query.includeKey("from")
+	query.include("from")
 	query.find({
 	  success: function(results) {
 	  	console.log("getRequestList > FOUND " + results.length + " OBJECTS")
