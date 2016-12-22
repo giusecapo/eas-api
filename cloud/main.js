@@ -149,26 +149,26 @@ Parse.Cloud.define("getRequestList", function(req, res){
 	  	let requests = results
 		for (i = 0; i < requests.length; i++) {
 			console.log("for")
-			let request = requests[i]
-	  		var title = request.get("subject")
-	  		var from = request.get("from")
-	  		var fromCountry = from.get("country")
-	  		var fromCompleteName = from.get("completeName")
-	  		var conversationArray = request.get("conversation")
-	  		var lastMessage = conversationArray[conversationArray.length - 1]
-	  		var status = request.get("status")
-	  		var notification = request.get("newMessageReceived")
-	  		var object = {
-			    requestTitle: title,
-			    fromUserCompleteName: fromCompleteName,
-			    fromUserCountry: fromCountry,
-			    lastMessagePreview: lastMessage,
-			    status: status,
-			    newMessageReceived: notification
-			}
-			output.push(object)
+			// let request = requests[i]
+	  // 		var title = request.get("subject")
+	  // 		var from = request.get("from")
+	  // 		var fromCountry = from.get("country")
+	  // 		var fromCompleteName = from.get("completeName")
+	  // 		var conversationArray = request.get("conversation")
+	  // 		var lastMessage = conversationArray[conversationArray.length - 1]
+	  // 		var status = request.get("status")
+	  // 		var notification = request.get("newMessageReceived")
+	  // 		var object = {
+			//     requestTitle: title,
+			//     fromUserCompleteName: fromCompleteName,
+			//     fromUserCountry: fromCountry,
+			//     lastMessagePreview: lastMessage,
+			//     status: status,
+			//     newMessageReceived: notification
+			// }
+			// output.push(object)
 	  	}
-	    res.success(output)
+	    res.success("boh")
 	  },
 	  error: function(error) {
 	    res.error(error);
