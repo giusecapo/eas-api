@@ -258,7 +258,7 @@ Parse.Cloud.define("getChatForUserWithID", function(req, res){
 		query.limit = 1
 		query.find({
 			success: function(result){
-				res.success(result.get("conversation"))
+				res.success(result[0].get("conversation"))
 			},
 			error: function(error){
 				res.error(error)
