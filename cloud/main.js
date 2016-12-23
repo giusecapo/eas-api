@@ -35,6 +35,24 @@ Parse.Cloud.define("getServiceList", function(req, res){
 	});
 })
 
+// get featured for home page
+
+Parse.Cloud.define("getFeaturedServiceList", function(req, res){
+	console.log("getFeaturedServiceList > CALLED")
+	var retrieveAll = new Parse.Query(Service)
+	retrieveAll.equalTo("enabled", true);
+	retrieveAll.equalTo("featured", true);
+	retrieveAll.find({
+	  success: function(results) {
+	  	console.log("getFeaturedServiceList > FOUND " + results.length + " OBJECTS")
+	    res.success(results)
+	  },
+	  error: function(error) {
+	    res.error(error);
+	  }
+	});
+})
+
 Parse.Cloud.define("getServiceWithID", function(req, res){
 	console.log("getServiceWithID > CALLED")
 	var objectID = req.params.objectID
@@ -197,6 +215,17 @@ Parse.Cloud.define("getRequestList", function(req, res){
 	  }
 	});
 })
+
+/*
+{
+	requestTitle: String,
+    fromUserCompleteName: String,
+    fromUserCountry: String,
+    lastMessagePreview(250): String,
+    status: String
+    newMessageReceived: boolean	
+}
+*/
 
 Parse.Cloud.define("getRequestForUserWithID", function(req, res){
 	var userId = req.params.userId
