@@ -200,5 +200,5 @@ Parse.Cloud.define("getRequestList", function(req, res){
 
 Parse.Cloud.define("getRequestForUserWithID", function(req, res){
 
-}
+})
 
