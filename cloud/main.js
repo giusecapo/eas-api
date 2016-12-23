@@ -169,6 +169,7 @@ Parse.Cloud.define("sendMessageToRequestID", function(req, res){
 {
     requestTitle: String,
     fromUserCompleteName: String,
+    fromUserId: String,
     fromUserCountry: String,
     lastMessagePreview(250): String,
     status: String
@@ -188,7 +189,7 @@ Parse.Cloud.define("getRequestList", function(req, res){
 	  	// console.log(JSON.stringify(results))
 		for (request of results) {
 	  		title = request.get("subject")
-	    	// from = request.get("from")
+	    	from = request.get("from")
 	   		// fromCountry = from.get("country")
 	   		fromCountry = "Italy"
 	  		// fromCompleteName = from.get("completeName")
@@ -202,6 +203,7 @@ Parse.Cloud.define("getRequestList", function(req, res){
 			    requestTitle: title,
 			    fromUserCompleteName: fromCompleteName,
 			    fromUserCountry: fromCountry,
+			    fromUserId: "c68myjc1AX",
 			    lastMessagePreview: lastMessage,
 			    status: status,
 			    newMessageReceived: notification
