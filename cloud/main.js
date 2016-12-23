@@ -92,7 +92,7 @@ Parse.Cloud.define("saveNewRequest", function(req, res){
 	var subject = req.params.subject
 	var request = new Request()
 	var message = messageJSON(messageBody, "user")
-    getUser(id).then(function(user){
+    getUser(userId).then(function(user){
             request.set("from", user)
 			request.set("subject", subject)
 			request.set("conversation", [message])
