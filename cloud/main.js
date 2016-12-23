@@ -70,26 +70,48 @@ function messageJSON(text, sender){
 	return jsonObj
 }
 
+function getUser(userId){
+    Parse.Cloud.useMasterKey();
+    var userQuery = new Parse.Query(Parse.User);
+    userQuery.equalTo("objectId", userId);
+    //Here you aren't directly returning a user, but you are returning a function that will sometime in the future return a user. This is considered a promise.
+    return userQuery.first({
+        success: function(userRetrieved){
+            //When the success method fires and you return userRetrieved you fulfill the above promise, and the userRetrieved continues up the chain.
+            return userRetrieved;
+        },
+        error: function(error){
+            return error;
+        }
+    });
+};
+
 Parse.Cloud.define("saveNewRequest", function(req, res){
-	var user = req.params.user
+	var userId = req.params.user
 	var messageBody = req.params.message
 	var subject = req.params.subject
 	var request = new Request()
 	var message = messageJSON(messageBody, "user")
-	request.set("from", user)
-	request.set("subject", subject)
-	request.set("conversation", [message])
-	request.set("status", "notRead")
-	request.set("newMessageReceived", true)
-	request.save(null, {
-	  success: function(result) {
-	  	res.success(result)
-	  },
-	  error: function(error) {
-	  	res.error(error)
-	  }
-	});
-})
+    getUser(id).then(function(user){
+            request.set("from", user)
+			request.set("subject", subject)
+			request.set("conversation", [message])
+			request.set("status", "notRead")
+			request.set("newMessageReceived", true)
+			request.save(null, {
+			  success: function(result) {
+			  	res.success(result)
+			  },
+			  error: function(error) {
+			  	res.error(error)
+			  }
+			});
+        },
+        function(error){
+            response.error(error);
+        }
+    );
+});
 
 Parse.Cloud.define("sendMessageToRequestID", function(req, res){
 	console.log("sendMessageToRequestID > CALLED")
@@ -175,3 +197,8 @@ Parse.Cloud.define("getRequestList", function(req, res){
 	  }
 	});
 })
+
+Parse.Cloud.define("getRequestForUserWithID", function(req, res){
+
+}
+
