@@ -249,3 +249,23 @@ Parse.Cloud.define("getRequestForUserWithID", function(req, res){
 	})
 })
 
+
+Parse.Cloud.define("getChatForUserWithID", function(req, res){
+	var userId = req.params.userId
+	getUser(userId).then(function(user){
+		var query = new Parse.Query("Request")
+		query.equalTo("from", user)
+		query.limit = 1
+		query.find({
+			success: function(result){
+				res.success(result.get("conversation"))
+			},
+			error: function(error){
+				res.error(error)
+			}
+		})
+	},
+	function(error){
+		res.error(error)
+	})
+})
