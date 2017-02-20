@@ -14,7 +14,7 @@ Parse.Cloud.define('hello', function(req, res) {
 });
 
 
-// v 1.0 
+// v 1.0
 /*
 getSeviceList() > list all services enabled as json ["id":"", "title":"", "shortDescription":"", "imageURL":"", "imageAlt":""]
 getServiceWithID(objectID: String) > PFObject
@@ -42,6 +42,7 @@ Parse.Cloud.define("getFeaturedServiceList", function(req, res){
 	var retrieveAll = new Parse.Query(Service)
 	retrieveAll.equalTo("enabled", true);
 	retrieveAll.equalTo("featured", true);
+  retrieveAll.limit = 6
 	retrieveAll.find({
 	  success: function(results) {
 	  	console.log("getFeaturedServiceList > FOUND " + results.length + " OBJECTS")
@@ -70,7 +71,7 @@ Parse.Cloud.define("getServiceWithID", function(req, res){
 })
 
 // For todays date;
-Date.prototype.today = function () { 
+Date.prototype.today = function () {
     return ((this.getDate() < 10)?"0":"") + this.getDate() +"/"+(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+ this.getFullYear();
 }
 
@@ -155,7 +156,7 @@ Parse.Cloud.define("sendMessageToRequestID", function(req, res){
 		  },
 		  error: function(object, error) {
 		  	res.error(error)
-		  }	
+		  }
 	  	})
 	  },
 	  error: function(error) {
@@ -179,7 +180,7 @@ Parse.Cloud.define("sendMessageToRequestID", function(req, res){
 
 Parse.Cloud.define("getRequestList", function(req, res){
 	console.log("getRequestList > CALLED")
-	var query = new Parse.Query('Request'); 
+	var query = new Parse.Query('Request');
 	var output = new Array()
 	query.notEqualTo("status", "archived");
 	query.include("from")
@@ -225,7 +226,7 @@ Parse.Cloud.define("getRequestList", function(req, res){
     fromUserCountry: String,
     lastMessagePreview(250): String,
     status: String
-    newMessageReceived: boolean	
+    newMessageReceived: boolean
 }
 */
 
