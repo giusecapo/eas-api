@@ -315,7 +315,7 @@ Parse.Cloud.define("createAppointment", function(req, res) {
           res.error(error)
       }
   });
-}
+})
 
 Parse.Cloud.define("getAvailableHoursForDate", function(req, res) {
   var date = req.params.date
@@ -335,7 +335,7 @@ Parse.Cloud.define("getAvailableHoursForDate", function(req, res) {
           res.error(error)
       }
   })
-}
+})
 
 function getTodayDateCustomObject(){
   var today = new Date();
@@ -362,4 +362,4 @@ Parse.Cloud.define("getAllAppointmentsForToday", function(req, res) {
           res.error(error)
       }
   })
-}
+})
