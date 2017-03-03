@@ -18,7 +18,7 @@ var api = new ParseServer({
   masterKey: process.env.MASTER_KEY || 'easMasterKey', //Add your master key here. Keep it secret!
   clientKey: process.env.CLIENT_KEY || 'easClientKey',
   javascriptKey: process.env.JAVASCRIPT_KEY || 'easJSKey',
-  serverURL: process.env.SERVER_URL || 'https://eas-staging.herokuapp.com/parse',  // Don't forget to change to https if needed
+  serverURL: process.env.SERVER_URL || 'http://eas-staging.herokuapp.com/parse',  // Don't forget to change to https if needed
   liveQuery: {
     classNames: ["Request"] // List of classes to support for query subscriptions
   }
