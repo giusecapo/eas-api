@@ -301,7 +301,7 @@ Parse.Cloud.define("createAppointment", function(req, res) {
   var tel = req.params.telephone
   var date = req.params.date
   var hour = req.params.hour
-  var dateString = "d:" + date.day + "m:" + date.month + "y:" + day.year
+  var dateString = "d:" + date.day + "m:" + date.month + "y:" + date.year
   var appointment = new Appointment()
   appointment.set("name", name)
   appointment.set("telephone", tel)
@@ -320,7 +320,7 @@ Parse.Cloud.define("createAppointment", function(req, res) {
 Parse.Cloud.define("getAvailableHoursForDate", function(req, res) {
   var date = req.params.date
   console.log(date);
-  var dateString = "d:" + date.day + "m:" + date.month + "y:" + day.year
+  var dateString = "d:" + date.day + "m:" + date.month + "y:" + date.year
   var query = new Parse.Query("Appointment")
   query.equalTo("date", dateString)
   query.find({
