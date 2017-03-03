@@ -335,7 +335,7 @@ Parse.Cloud.define("getAvailableHoursForDate", function(req, res) {
             hoursNotAvailable.push(hour)
           }
           console.log(hoursNotAvailable);
-          var response = new Set([...availableHours].filter(x => !hoursNotAvailable.has(x)))
+          // var response = new Set([...availableHours].filter(x => !hoursNotAvailable.has(x)))
           console.log(availableHours.diff(hoursNotAvailable))
           res.success(response)
       },
@@ -360,8 +360,9 @@ function getTodayDateCustomObject(){
 
 Parse.Cloud.define("getAllAppointmentsForToday", function(req, res) {
   var date = getTodayDateCustomObject()
+  var dateString = "d:" + date.day + "m:" + date.month + "y:" + date.year
   var query = new Parse.Query("Appointment")
-  query.equalTo("date", date)
+  query.equalTo("date", dateString)
   query.find({
       success: function(result) {
           res.success(result)
