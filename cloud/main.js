@@ -332,6 +332,7 @@ Parse.Cloud.define("getAvailableHoursForDate", function(req, res) {
           }
           console.log(hoursNotAvailable);
           var response = new Set([...availableHours].filter(x => !hoursNotAvailable.has(x)))
+          console.log(response)
           res.success(response)
       },
       error: function(error) {
