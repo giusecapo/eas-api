@@ -345,7 +345,7 @@ function getTodayDateCustomObject(){
   var customDateObj = {
     day: dd,
     month: mm,
-    year = yyyy
+    year: yyyy
   }
   return customDateObj;
 }
