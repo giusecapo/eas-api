@@ -319,6 +319,7 @@ Parse.Cloud.define("createAppointment", function(req, res) {
 
 Parse.Cloud.define("getAvailableHoursForDate", function(req, res) {
   var date = req.params.date
+  console.log(date);
   var query = new Parse.Query("Appointment")
   query.equalTo("date", date)
   query.find({
@@ -328,6 +329,7 @@ Parse.Cloud.define("getAvailableHoursForDate", function(req, res) {
             var hour = object.get("hour")
             hoursNotAvailable.push(hour)
           }
+          console.log(hoursNotAvailable);
           var response = new Set([...availableHours].filter(x => !hoursNotAvailable.has(x)))
           res.success(response)
       },
