@@ -317,6 +317,10 @@ Parse.Cloud.define("createAppointment", function(req, res) {
   });
 })
 
+Array.prototype.diff = function(a) {
+    return this.filter(function(i) {return a.indexOf(i) < 0;});
+};
+
 Parse.Cloud.define("getAvailableHoursForDate", function(req, res) {
   var date = req.params.date
   console.log(date);
@@ -332,7 +336,7 @@ Parse.Cloud.define("getAvailableHoursForDate", function(req, res) {
           }
           console.log(hoursNotAvailable);
           var response = new Set([...availableHours].filter(x => !hoursNotAvailable.has(x)))
-          console.log(response)
+          console.log(availableHours.diff(hoursNotAvailable);)
           res.success(response)
       },
       error: function(error) {
