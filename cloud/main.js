@@ -294,6 +294,8 @@ Parse.Cloud.define("getChatForUserWithID", function(req, res) {
         })
 })
 
+var availableHours = ["8:00", "8:15", "8:30", "8:45", "9:00"]
+
 Parse.Cloud.define("createAppointment", function(req, res) {
   var name = req.params.name
   var tel = req.params.telephone
@@ -313,4 +315,51 @@ Parse.Cloud.define("createAppointment", function(req, res) {
           res.error(error)
       }
   });
+}
+
+Parse.Cloud.define("getAvailableHoursForDate", function(req, res) {
+  var date = req.params.date
+  var query = new Parse.Query("Appointment")
+  query.equalTo("date", date)
+  query.find({
+      success: function(result) {
+          var hoursNotAvailable = []
+          for (object of result) {
+            var hour = object.get("hour")
+            hoursNotAvailable.push(hour)
+          }
+          var response = new Set([...availableHours].filter(x => !hoursNotAvailable.has(x)))
+          res.success(response)
+      },
+      error: function(error) {
+          res.error(error)
+      }
+  })
+}
+
+function getTodayDateCustomObject(){
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1;
+  var yyyy = today.getFullYear();
+  var customDateObj = {
+    day: dd;
+    month: mm;
+    year = yyyy;
+  }
+  return customDateObj;
+}
+
+Parse.Cloud.define("getAllAppointmentsForToday", function(req, res) {
+  var date = getTodayDateCustomObject()
+  var query = new Parse.Query("Appointment")
+  query.equalTo("date", date)
+  query.find({
+      success: function(result) {
+          res.success(result)
+      },
+      error: function(error) {
+          res.error(error)
+      }
+  })
 }
