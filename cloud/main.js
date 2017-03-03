@@ -7,6 +7,7 @@ var Service = Parse.Object.extend("Service");
 var SubService = Parse.Object.extend("SubService");
 var ExtraService = Parse.Object.extend("ExtraService");
 var Request = Parse.Object.extend("Request");
+var Appointment = Parse.Object.extend("Appointment");
 
 Parse.Cloud.define('hello', function(req, res) {
     res.success('Hi');
@@ -292,3 +293,24 @@ Parse.Cloud.define("getChatForUserWithID", function(req, res) {
             res.error(error)
         })
 })
+
+Parse.Cloud.define("createAppointment", function(req, res) {
+  var name = req.params.name
+  var tel = req.params.telephone
+  var date = req.params.date
+  var hour = req.params.hour
+
+  var appointment = new Appointment()
+  appointment.set("name", name)
+  appointment.set("telephone", tel)
+  appointment.set("date", date)
+  appointment.set("hour", hour)
+  appointment.save(null, {
+      success: function(result) {
+          res.success(result)
+      },
+      error: function(error) {
+          res.error(error)
+      }
+  });
+}
