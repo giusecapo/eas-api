@@ -21,8 +21,10 @@ getServiceWithID(objectID: String) > PFObject
 */
 
 Parse.Cloud.define("getServiceList", function(req, res) {
+    let type = req.params.type
     console.log("getServiceList > CALLED")
     var retrieveAll = new Parse.Query(Service)
+    retrieveAll.equalTo("type", type);
     retrieveAll.equalTo("enabled", true);
     retrieveAll.find({
         success: function(results) {
